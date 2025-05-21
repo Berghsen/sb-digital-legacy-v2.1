@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../App';
-import { supabase } from '../supabaseClient'; // Import your Supabase client
+import supabase from '../supabaseClient'; // Import the default export
+import { signInWithGoogle } from '../supabaseClient'; // Import the named export
 
 const DashboardPage = () => {
   const { session } = useAuth();
@@ -18,8 +19,8 @@ const DashboardPage = () => {
     }
   };
 
-  const goToSettings = () => {
-    navigate('/settings');
+  const goToAccount = () => {
+    navigate('/Account');
   };
 
   if (!session) {
@@ -31,7 +32,7 @@ const DashboardPage = () => {
       <h1>Welcome to your Dashboard, {session?.user?.email}!</h1>
       <p>User ID: {session?.user?.id}</p>
       <button onClick={handleLogout}>Logout</button>
-      <button onClick={goToSettings}>Go to Settings</button>
+      <button onClick={goToAccount}>My Account</button>
       {/* Add other dashboard content here */}
     </div>
   );

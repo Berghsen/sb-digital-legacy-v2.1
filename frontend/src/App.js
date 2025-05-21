@@ -1,10 +1,12 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { supabase } from './supabaseClient';
+import supabase from './supabaseClient'; // Import the default export
+import { signInWithGoogle } from './supabaseClient'; // Import the named export
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import DashboardPage from './pages/DashboardPage'; // Your protected page
-import SettingsPage from './pages/SettingsPage'; // Import the new component
+import AccountPage from './pages/AccountPage'; // Import the new component
+
 
 // Create a context to hold the user session
 const AuthContext = createContext(null);
@@ -42,9 +44,9 @@ function App() {
             }
           />
           <Route
-            path="/settings"
+            path="/Account"
             element={
-              session ? <SettingsPage /> : <Navigate to="/login" replace />
+              session ? <AccountPage /> : <Navigate to="/login" replace />
             }
           />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
